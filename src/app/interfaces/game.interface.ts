@@ -6,6 +6,7 @@ export interface GameRequest {
     currencysymbol: string
     currencynamesingle: string
     currencynamemultiple: string
+    image: string | null
 
     partycurrency: number
 }
@@ -17,6 +18,7 @@ export interface GamePost {
     currencynamesingle: string
     currencynamemultiple: string
     swordpriceincurrency: number
+    image: string | null
     fromgame: string
 
     partycurrency: number

@@ -15,6 +15,8 @@ export interface ItemDetailed {
     description: string
     stats: string
     curses: string | null
+
+    quantity: number
 }
 
 export interface ItemPost {

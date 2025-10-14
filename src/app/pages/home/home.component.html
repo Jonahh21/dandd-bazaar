@@ -1,0 +1,14 @@
+<h2>Bienvenido [user] a D&DBazaar</h2>
+<h3>¿Ya no lo usáis? ¡Véndelo!</h3>
+<div>
+    @if (ddserv.myGames.hasValue()) {
+        @for (game of ddserv.myGames.value(); track game.id) {
+            <div>
+                <img [src]="game.image ?? 'https://uploads.dailydot.com/2024/05/guess-ill-die-meme-stock-photo.jpg?auto=compress&fm=pjpg'" alt="">
+                <p>Juego: {{ game.name }}</p>
+                <p>Dinero en tu grupo: {{ game.partycurrency }} {{ game.currencysymbol }}</p>
+                <a [routerLink]="'' + game.id + '/buy'">Comprar productos</a>
+            </div>
+        }
+    }
+</div>
