@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { Skeleton } from './pages/layout/skeleton/skeleton';
 import { HomeComponent } from './pages/home/home.component';
-import { ItemListComponent } from './pages/ItemList/ItemList.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { GamesComponent } from './pages/games/games.component';
 
 export const routes: Routes = [
     {
@@ -15,8 +15,8 @@ export const routes: Routes = [
                 loadComponent: () => HomeComponent
             },
             {
-                path: ':gameid/buy',
-                loadComponent: () => ItemListComponent
+                path: 'games',
+                loadComponent: () => GamesComponent
             }
         ]
     },

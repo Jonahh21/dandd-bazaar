@@ -1,11 +1,14 @@
 <div class="w-fill h-screen m-0 heroimage flex flex-col justify-center items-center">
-    <div class="max-w-100 text-center flex flex-col justify-center content-center backdrop-blur-2xl backdrop-opacity-80 p-10 rounded-lg shadow-2xl">
-        <h2>Bienvenido a D&DBazaar</h2>
-        <h3>¿Ya no lo usáis? ¡Véndelo!</h3>
+    <div class="max-w-100 text-center flex flex-col justify-center content-center backdrop-blur-xl backdrop-contrast-60 p-10 rounded-lg shadow-2xl">
+        <h2 class="text-3xl font-extrabold">¡Bienvenido a D&DBazaar!</h2>
+        <h3 class="text-2xl">¿Ya no lo usáis? ¡Véndelo!</h3>
         <p>En D&DBazaar, puedes vender objetos de tus campañas de una manera sencilla, simplemente crea una cuenta, crea un juego y crea el Item que quieres vender.</p>
         @if (authserv.jwtToken() == null) {
             <a [routerLink]="'/register'" class="btn btn-primary mt-4">¡Regístrate ahora y empieza a vender!</a>
             <a [routerLink]="'/login'" class="btn btn-secondary mt-4 ml-2">¿Ya tienes cuenta? Inicia sesión</a>
+        }
+        @if (authserv.jwtToken() != null) {
+            <a [routerLink]="'/games'" class="btn btn-primary text-2xl mt-2">Explorar mis juegos</a>
         }
     </div>
 </div>
