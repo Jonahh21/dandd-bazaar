@@ -1,5 +1,10 @@
 export const environment = {
-    mocking: true,
+    appname: "DandD Bazaar",
+
+
+    mocking: false,
     production: false,
-    baseurl: ""
+    baseurl: "http://localhost:8080/",
+    apiURL: "http://localhost:8080/api/",
+    authURL: "http://localhost:8080/auth/"
 };

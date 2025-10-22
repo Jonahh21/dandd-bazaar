@@ -20,7 +20,7 @@ export class ItemListComponent {
   ngOnInit() {
     this.router.params.subscribe((params) => {
       console.log(params)
-      this.ddserv.currentGameID.set(params['gameid'] as number)
+      const gameId = Number(params['gameId'])
     })
   }
 

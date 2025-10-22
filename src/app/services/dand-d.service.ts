@@ -1,48 +1,39 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
-import DandDRepository from '../repository/dand-d.repository';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { inject, Injectable } from '@angular/core';
 import { GameRequest } from '../interfaces/game.interface';
-import { of } from 'rxjs';
-import { ItemDetailed } from '../interfaces/item.interface';
+import { ItemSimple } from '../interfaces/item.interface';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from './Auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DandDService {
-  private repo = inject(DandDRepository)
+  http = inject(HttpClient);
 
-  myGames = rxResource({
-    stream: (params) => {
-      return this.repo.getGames()!
-    }
-  })
+  authServ = inject(AuthService);
 
-  currentGameID = signal<number | null>(null)
+  getGames() {
+    return this.http.get<GameRequest[]>(environment.apiURL + "games", this.authServ.computedHeaders())
+  }
 
-  selectedGame = computed(() => {
-    if (this.currentGameID() == null) return null
+  getGame(id: number) {
+    return this.http.get<GameRequest>(environment.apiURL + "games/" + id, this.authServ.computedHeaders())
+  }
 
-    return this.myGames.value()?.find((game) => {
-      return game.id == this.currentGameID()!
-    }) ?? null
-  })
+  getGameInventory(gameId: number) {
+    return this.http.get<ItemSimple[]>(environment.apiURL + "games/" + gameId + "/inventory", this.authServ.computedHeaders())
+  }
 
-  items = rxResource({
-    stream: (params) => {
-      return this.repo.getItems()!
-    }
-  })
+  getGameStore(gameId: number) {
+    return this.http.get<ItemSimple[]>(environment.apiURL + "games/" + gameId + "/store", this.authServ.computedHeaders())
+  }
 
-  selectedItemID = signal<number | null>(null)
+  getItemDetails(gameId: number, itemId: number) {
+    return this.http.get<ItemSimple>(environment.apiURL + "games/" + gameId + "/store/" + itemId, this.authServ.computedHeaders())
+  }
 
-  selectedItem = rxResource({
-    params: () => ({
-      id: this.selectedItemID()
-    }),
-    stream: ({ params }) => {
-      const id = params.id;
-      if (id == null) return of(null)
-      return this.repo.getItem(id)!;
-    }
-  })
+  buyGameItem(gameId: number, itemId: number) {
+    return this.http.post(environment.apiURL + "games/" + gameId + "/buy/" + itemId, {}, this.authServ.computedHeaders())
+  }
 }

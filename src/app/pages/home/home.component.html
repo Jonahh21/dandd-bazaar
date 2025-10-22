@@ -1,14 +1,11 @@
-<h2>Bienvenido [user] a D&DBazaar</h2>
-<h3>¿Ya no lo usáis? ¡Véndelo!</h3>
-<div>
-    @if (ddserv.myGames.hasValue()) {
-        @for (game of ddserv.myGames.value(); track game.id) {
-            <div>
-                <img [src]="game.image ?? 'https://uploads.dailydot.com/2024/05/guess-ill-die-meme-stock-photo.jpg?auto=compress&fm=pjpg'" alt="">
-                <p>Juego: {{ game.name }}</p>
-                <p>Dinero en tu grupo: {{ game.partycurrency }} {{ game.currencysymbol }}</p>
-                <a [routerLink]="'' + game.id + '/buy'">Comprar productos</a>
-            </div>
+<div class="w-fill h-screen m-0 heroimage flex flex-col justify-center items-center">
+    <div class="max-w-100 text-center flex flex-col justify-center content-center backdrop-blur-2xl backdrop-opacity-80 p-10 rounded-lg shadow-2xl">
+        <h2>Bienvenido a D&DBazaar</h2>
+        <h3>¿Ya no lo usáis? ¡Véndelo!</h3>
+        <p>En D&DBazaar, puedes vender objetos de tus campañas de una manera sencilla, simplemente crea una cuenta, crea un juego y crea el Item que quieres vender.</p>
+        @if (authserv.jwtToken() == null) {
+            <a [routerLink]="'/register'" class="btn btn-primary mt-4">¡Regístrate ahora y empieza a vender!</a>
+            <a [routerLink]="'/login'" class="btn btn-secondary mt-4 ml-2">¿Ya tienes cuenta? Inicia sesión</a>
         }
-    }
+    </div>
 </div>

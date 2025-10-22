@@ -1,0 +1,13 @@
+<div class="wrapper h-screen flex flex-col justify-center items-center">
+    <div class="w-100 h-100 bordered bg-base-200 shadow mx-auto flex flex-col justify-between">
+        <h2 class="text-center text-2xl font-bold mt-2">Iniciar Sesión</h2>
+
+        <div class="p-4 flex flex-col space-y-4">
+            <input type="text" name="username" class="input w-full" placeholder="Usuario" [formControl]="username"/>
+            <input type="password" name="password" class="input w-full" placeholder="Contraseña" [formControl]="password"/>
+            <button class="btn btn-primary w-full" (click)="login()">Iniciar Sesión</button>
+            <a [routerLink]="'/register'" class="text-center text-sm text-blue-500 hover:underline">¿No tienes cuenta? Regístrate aquí</a>
+        </div>
+
+    </div>
+</div>

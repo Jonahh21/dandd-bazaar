@@ -1,3 +1,10 @@
 :host {
   display: block;
 }
+
+.heroimage {
+  background-image: url("https://i.kickstarter.com/assets/040/563/561/15f05da6fea7c093c0241e281a985c08_original.jpg?anim=false&fit=cover&gravity=auto&height=576&origin=ugc&q=92&v=1681239601&width=1024&sig=g01pXS%2FdS55WNMre%2FWr3eAlYfGt0qJeVshTEiBenYUU%3D");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

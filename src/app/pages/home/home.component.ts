@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DandDService } from '../../services/dand-d.service';
 import { RouterLink } from '@angular/router';
 import { GameCurrencyPipe } from "../../common/pipes/GameCurrency.pipe";
+import { AuthService } from '../../services/Auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { GameCurrencyPipe } from "../../common/pipes/GameCurrency.pipe";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent { 
+
+  authserv = inject(AuthService)
 
   ddserv = inject(DandDService)
 

@@ -1,3 +1,5 @@
+import { GameRequest } from "./game.interface";
+import { LoreRequest } from "./lore.interface";
 
 
 export interface ItemSimple {
@@ -8,23 +10,35 @@ export interface ItemSimple {
 }
 
 export interface ItemDetailed {
-    id: number
-    name: string
-    price: number
-    image: string
-    description: string
-    stats: string
-    curses: string | null
-
-    quantity: number
+    id:              number;
+    name:            string;
+    price:           number;
+    image:           string;
+    description:     string;
+    stats:           string;
+    curses:          string;
+    fromGame:        string;
+    hidden:          boolean;
+    purchasehistory: Purchasehistory[];
+    lore:            LoreRequest[];
+    quantity:        number;
 }
 
+export interface Purchasehistory {
+    id:          number;
+    origin:      GameRequest;
+    destination: GameRequest;
+    purchasedat: Date;
+}
+
+
 export interface ItemPost {
-    id: number | null
     name: string
     price: number
     image: string | null
     description: string
     stats: string
-    curses: string | null
+    curses: string | null,
+    quantity: number,
+    hidden: boolean
 }

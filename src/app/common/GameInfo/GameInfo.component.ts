@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { DandDService } from '../../services/dand-d.service';
 import { GameCurrencyPipe } from '../pipes/GameCurrency.pipe';
+import { GameRequest } from '../../interfaces/game.interface';
 
 @Component({
   selector: 'app-game-info',
@@ -13,8 +14,16 @@ export class GameInfoComponent {
 
   ddserv = inject(DandDService)
 
-  gameinfo = computed(() => {
-    return this.ddserv.selectedGame()
+  gameinfo = computed<GameRequest>(() => {
+    return {
+      "id": 1,
+      "name": "España",
+      "currencysymbol": "€",
+      "currencynamesingle": "Euro",
+      "currencynamemultiple": "Euros",
+      "image": null,
+      "partycurrency": 300
+    }
   })
 
 }
