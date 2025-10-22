@@ -1,0 +1,23 @@
+<div class="p-4 m-2 bg-base-200 rounded-2xl shadow">
+    <form class="join-vertical" [formGroup]="formGroup">
+        <input formControlName="name" type="text" placeholder="Nombre del juego" class="input input-bordered join-item w-full"/>
+        <input formControlName="currencysymbol" type="text" placeholder="Símbolo de moneda" class="input input-bordered join-item w-full"/>
+        <input formControlName="currencynamesingle" type="text" placeholder="Nombre de moneda en singular" class="input input-bordered join-item w-full"/>
+        <input formControlName="currencynamemultiple" type="text" placeholder="Nombre de moneda en plural" class="input input-bordered join-item w-full"/>
+        <div>
+            <p>Usamos el precio de esta espada básica como referencia para determinar la economía de tu juego, por favor se honesto</p>
+            <img class="w-50 h-20 object-cover p-2 border my-4 rounded-2xl shadow-lg" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSpdSGxonJoPIJh98Hkt4I5iPEr280yo_12jcQPjHfD6ZkfFUDraYF2H2BQdgp6CYbAPy6BMrp4cwhHmL3mAc3fHnfhHJlOTt7MARS60YOccjs&usqp=CAc" alt="espada de hierro de 20 euros">
+            <p class="my-4 p-4 text-center w-fit rounded-2xl bg-accent text-accent-content">{{ comparisonstring() }}</p>
+            <input formControlName="swordpriceincurrency" type="number" placeholder="Precio de espada en este juego" class="input input-bordered join-item w-full"/>
+        </div>
+        <div>
+            <p>La imagen es puramente organizativa</p>
+            <input formControlName="image" type="url" placeholder="Url de imagen de este juego (Opcional)" class="input input-bordered join-item w-full"/>
+            @if (hasImage()) {
+                <img class="w-50 object-cover my-4 rounded-2xl shadow-lg border" [src]="imageurl()" alt="">
+            }
+        </div>
+        <input formControlName="partycurrency" type="number" placeholder="Dinero del grupo" class="input input-bordered join-item w-full"/>
+        <button type="submit" (click)="submit()" class="btn btn-primary join-item w-full">Agregar Juego</button>
+    </form>
+</div>

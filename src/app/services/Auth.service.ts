@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { catchError, tap } from 'rxjs';
 
@@ -12,12 +12,18 @@ export class AuthService {
 
   jwtToken = signal<string | null>(null);
   authHeader = computed(() => {
-    return {'Authentication': `Bearer ${this.jwtToken()}`}
+    return {'Authorization': `Bearer ${this.jwtToken()}`}
   })
   computedHeaders = computed(() => {
     return {
       headers: this.authHeader()
     }
+  })
+
+  headersChanged = effect(() => {
+    console.log("JWT Token: ", this.jwtToken())
+    console.log("Auth Header: ", this.authHeader())
+    console.log("Computed Headers: ", this.computedHeaders())
   })
 
   constructor() {

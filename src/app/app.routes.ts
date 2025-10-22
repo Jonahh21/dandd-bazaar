@@ -4,6 +4,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { GamesComponent } from './pages/games/games.component';
+import { GameComponent } from './pages/game/game';
+import { GameInventory } from './pages/game-inventory/game-inventory';
+import { GameStore } from './pages/game-store/game-store';
 
 export const routes: Routes = [
     {
@@ -17,6 +20,20 @@ export const routes: Routes = [
             {
                 path: 'games',
                 loadComponent: () => GamesComponent
+            },
+            {
+                path: 'games/:gameId',
+                loadComponent: () => GameComponent,
+                children: [
+                    {
+                        path: 'inventory',
+                        loadComponent: () => GameInventory
+                    },
+                    {
+                        path: 'store',
+                        loadComponent: () => GameStore
+                    }
+                ]
             }
         ]
     },

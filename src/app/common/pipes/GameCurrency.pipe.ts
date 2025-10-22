@@ -15,15 +15,7 @@ export class GameCurrencyPipe implements PipeTransform {
   ddserv = inject(DandDService)
 
   gameinfo = computed(() => {
-    return {
-      "id": 1,
-      "name": "España",
-      "currencysymbol": "€",
-      "currencynamesingle": "Euro",
-      "currencynamemultiple": "Euros",
-      "image": null,
-      "partycurrency": 300
-    }
+    return this.ddserv.gameInfo.value()
   })
 
   transform(value: number, ...args: string[]): string {

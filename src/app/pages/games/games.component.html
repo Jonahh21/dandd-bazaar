@@ -1,9 +1,19 @@
 <div class="p-2">
     <h2 class="text-3xl">Mis Juegos</h2>
-    @if (games.hasValue()) {
-        <p>Tengo juegos</p>
+    @if (games.hasValue() && games.value().length > 0) {
+        <button (click)="toggleForm()" class="btn mt-2"
+        [class.btn-primary]="!showForm()"
+        [class.btn-error]="showForm()"
+        >{{ showForm() ? "Cancelar" : "Nuevo Juego" }}</button>
+        @if (showForm()) {
+            <div (animate.enter)="formappear($event)" (animate.leave)="formdisappear($event)">
+                <app-game-form (gamecreated)="gamecreated($event)"></app-game-form>
+            </div>
+        }
+        <app-game-list [games]="games.value()"></app-game-list>
     } 
     @else {
-        <p>No tengo juegos</p>
+        <p>No tienes juegos, para empezar a usar la web, necesitas tener al menos 1</p>
+        <app-game-form (gamecreated)="gamecreated($event)"></app-game-form>
     }
 </div>

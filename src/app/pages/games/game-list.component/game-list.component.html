@@ -1,1 +1,17 @@
-<p>game-list.component works!</p>,
+<div class="grid grid-cols-4 gap-2 mt-2">
+    @for (game of games(); track game.id) {
+        <div class="card rounded shadow bg-base-300 pb-2 overflow-hidden">
+            <figure>
+                <img [src]="game.image" alt="" class="object-cover max-h-50 w-full">
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">{{ game.name }}</h2>
+                <p>Dinero del grupo {{ game.partycurrency }}{{ game.currencysymbol }}</p>
+            </div>
+            <div class="card-actions">
+                <a [routerLink]="'/games/' + game.id + '/inventory'" class="btn btn-primary">Ver inventario</a>
+                <a [routerLink]="'/games/' + game.id + '/store'" class="btn btn-secondary">Comprar items</a>
+            </div>
+        </div>
+    }
+</div>

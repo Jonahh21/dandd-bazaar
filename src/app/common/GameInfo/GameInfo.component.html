@@ -1,2 +1,9 @@
-<h2>{{ gameinfo()?.name }}</h2>
-<p>Dinero del grupo: {{ gameinfo()?.partycurrency ?? 0 | gamecurrency }}</p>
+<div class="glass bg-base-300 rounded-2xl mt-2 sticky top-0 p-4 flex justify-center content-center gap-4">
+    @if (gameinfo.value()?.image != null) {
+        <img [src]="gameinfo.value()?.image" alt="" class="w-20 h-20 object-cover rounded-lg">
+    }
+    <div class="h-fill flex flex-col justify-around content-center glass px-3 rounded-2xl">
+        <h2 class="text-3xl font-extrabold text-primary">{{ gameinfo.value()?.name }}</h2>
+        <p> Dinero del grupo: <span class="font-extrabold text-accent">{{ gameinfo.value()?.partycurrency! | gamecurrency}}</span> </p>
+    </div>
+</div>

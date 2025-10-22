@@ -14,16 +14,6 @@ export class GameInfoComponent {
 
   ddserv = inject(DandDService)
 
-  gameinfo = computed<GameRequest>(() => {
-    return {
-      "id": 1,
-      "name": "España",
-      "currencysymbol": "€",
-      "currencynamesingle": "Euro",
-      "currencynamemultiple": "Euros",
-      "image": null,
-      "partycurrency": 300
-    }
-  })
+  gameinfo = this.ddserv.gameInfo
 
 }

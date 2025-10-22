@@ -27,6 +27,8 @@ export class RegisterComponent {
       email: this.email.value || ''
     }
 
+    console.log("Registering user", post);
+
     this.authServ.doRegister(post).subscribe(
       (token) => {
         if(token) {
