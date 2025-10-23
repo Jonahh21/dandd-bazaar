@@ -15,7 +15,7 @@
                 <p class="glass rounded"> {{ item.value()?.curses }} </p>
             }
             <p>Cantidad: {{ item.value()?.quantity }} </p>
-            @if ((ddServ.gameInfo.value()?.partycurrency ?? 0) >= (item.value()?.price ?? 2)) {
+            @if ((ddServ.gameInfo.value()?.partycurrency ?? 0) >= (item.value()?.price ?? 2) && ddServ.gameInfo.value()?.name != item.value()?.fromGame) {
                 <button class="btn btn-success btn-block text-2xl" (click)="buy()">Comprar</button>
             }
         </div>
@@ -23,10 +23,10 @@
     <div class="flex gap-2 my-2">
         @if (item.value()?.purchasehistory?.length ?? 0 > 0) {
             <div class="flex-1">
-                historial de compras
+                <app-purchase-history [history]="item.value()?.purchasehistory || []"></app-purchase-history>
             </div>
         }
-        @if (item.value()?.purchasehistory?.length ?? 0 > 0) {
+        @if (item.value()?.lore?.length ?? 0 > 0) {
             <div class="flex-1">
                 historial de lore
             </div>

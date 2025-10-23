@@ -3,10 +3,11 @@ import { DandDService } from '../../services/dand-d.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location as Angloc } from '@angular/common';
 import { GameCurrencyPipe } from '../../common/pipes/GameCurrency.pipe';
+import { PurchaseHistoryComponent } from "./purchase-history/purchase-history";
 
 @Component({
   selector: 'app-item-detail',
-  imports: [GameCurrencyPipe],
+  imports: [GameCurrencyPipe, PurchaseHistoryComponent],
   templateUrl: './item-detail.html',
   styleUrl: './item-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +32,11 @@ export class ItemDetail {
 
   buy() {
     if(this.gid() == null || this.ddServ.itemId == null) return
-    this.ddServ.buyGameItem(this.gid()!, this.ddServ.itemId()! )
+    this.ddServ.buyGameItem(this.gid()!, this.ddServ.itemId()! ).subscribe((value) => {
+      console.log(value)
+      this.ddServ.itemDetail.reload()
+      this.ddServ.gameInfo.reload()
+    })
   }
 
   goback() {

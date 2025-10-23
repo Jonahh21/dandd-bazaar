@@ -19,12 +19,12 @@ export interface ItemDetailed {
     curses:          string;
     fromGame:        string;
     hidden:          boolean;
-    purchasehistory: Purchasehistory[];
+    purchasehistory: PurchaseHistory[];
     lore:            LoreRequest[];
     quantity:        number;
 }
 
-export interface Purchasehistory {
+export interface PurchaseHistory {
     id:          number;
     origin:      GameRequest;
     destination: GameRequest;
