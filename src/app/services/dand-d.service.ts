@@ -1,11 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { GamePost, GameRequest } from '../interfaces/game.interface';
-import { ItemPost, ItemSimple } from '../interfaces/item.interface';
+import { ItemDetailed, ItemPost, ItemSimple } from '../interfaces/item.interface';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './Auth.service';
 import { environment } from '../../environments/environment';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
+import { Pagination } from '../interfaces/pagination.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,34 @@ export class DandDService {
     }
   })
 
+  itemId = signal<number | null>(null)
+
+  itemDetail = rxResource({
+    params: () => ({
+      gameId: this.gameId(),
+      itemId: this.itemId()
+    }),
+    stream: ({params}) => {
+      const placeholder: ItemDetailed = {
+        id: 0,
+        name: '',
+        price: 0,
+        image: '',
+        description: '',
+        stats: '',
+        curses: '',
+        fromGame: '',
+        hidden: false,
+        purchasehistory: [],
+        lore: [],
+        quantity: 0
+      }
+
+      if (params.gameId == null || params.itemId == null) return of(placeholder)
+      return this.getItemDetails(params.gameId, params.itemId)
+    }
+  })
+
   // MARK: Games
   getGames() {
     return this.http.get<GameRequest[]>(environment.apiURL + "games", this.authServ.computedHeaders())
@@ -55,20 +84,25 @@ export class DandDService {
     return this.http.get<ItemSimple[]>(environment.apiURL + "games/" + gameId + "/inventory", this.authServ.computedHeaders())
   }
 
-  getGameStore(gameId: number) {
-    return this.http.get<ItemSimple[]>(environment.apiURL + "games/" + gameId + "/store", this.authServ.computedHeaders())
+  getGameStore(gameId: number, page: number = 1) {
+    return this.http.get<Pagination<ItemSimple>>(environment.apiURL + "games/" + gameId + "/store", {
+      headers: this.authServ.authHeader(),
+      params: {
+        page: page
+      }
+    })
   }
 
   getItemDetails(gameId: number, itemId: number) {
-    return this.http.get<ItemSimple>(environment.apiURL + "games/" + gameId + "/store/" + itemId, this.authServ.computedHeaders())
+    return this.http.get<ItemDetailed>(environment.apiURL + "games/" + gameId + "/store/" + itemId, this.authServ.computedHeaders())
   }
 
   // MARK: Item Actions
   createGameItem(gameId: number, post: ItemPost) {
-    return this.http.post(environment.apiURL + "games/" + gameId + "/create", post, this.authServ.computedHeaders())
+    return this.http.post<ItemDetailed>(environment.apiURL + "games/" + gameId + "/create", post, this.authServ.computedHeaders())
   }
 
   buyGameItem(gameId: number, itemId: number) {
-    return this.http.post(environment.apiURL + "games/" + gameId + "/buy/" + itemId, {}, this.authServ.computedHeaders())
+    return this.http.post<ItemDetailed>(environment.apiURL + "games/" + gameId + "/buy/" + itemId, {}, this.authServ.computedHeaders())
   }
 }

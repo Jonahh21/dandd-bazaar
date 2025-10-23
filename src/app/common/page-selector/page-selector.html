@@ -1,0 +1,12 @@
+<div class="flex gap-1">
+    <button class="btn btn-secondary"
+    [disabled]="!canPrev()" (click)="setPage(currentpage() - 1)">Anterior Página</button>
+    @for (page of pagearray(); track page) {
+        <button class="btn btn-circle btn-accent btn-dash"
+        [class.btn-active]="page == currentpage()"
+        (click)="setPage(page)"
+        >{{page}}</button>
+    }
+    <button class="btn btn-secondary"
+    [disabled]="!canNext()" (click)="setPage(currentpage() + 1)">Siguiente Página</button>
+</div>

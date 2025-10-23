@@ -37,7 +37,7 @@ export class GameCurrencyPipe implements PipeTransform {
         return `${value.toFixed(2)} ${this.gameinfo()?.currencynamemultiple}`
         break;
       case DisplayType.SYMBOL:
-        return `${value.toFixed(2)} ${this.gameinfo()?.currencysymbol}`
+        return `${value.toFixed(2)}${this.gameinfo()?.currencysymbol}`
         break;
 
     }

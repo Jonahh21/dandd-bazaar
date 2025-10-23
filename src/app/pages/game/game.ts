@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { DandDService } from '../../services/dand-d.service';
 import { GameInfoComponent } from '../../common/GameInfo/GameInfo.component';
 
 @Component({
   selector: 'app-game',
-  imports: [GameInfoComponent],
+  imports: [GameInfoComponent, RouterOutlet],
   templateUrl: './game.html',
   styleUrl: './game.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

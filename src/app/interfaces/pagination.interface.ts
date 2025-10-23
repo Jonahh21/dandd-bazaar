@@ -1,4 +1,4 @@
-export interface Paginator<T> {
+export interface Pagination<T> {
     page:     number;
     count:    number;
     allPages: number;

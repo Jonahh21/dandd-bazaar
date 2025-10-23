@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../../services/Auth.service';
 import { environment } from '../../../../../environments/environment';
 
@@ -14,9 +14,12 @@ export class HeaderComponent {
 
   authService = inject(AuthService);
 
+  router = inject(Router)
+
   appName = signal(environment.appname)
   
   logout() {
     this.authService.doLogout()
+    this.router.navigate(['/'])
   }
 }

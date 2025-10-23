@@ -73,6 +73,9 @@ export class GameFormComponent {
     if (post.name == '' || post.partycurrency == 0.1) {
       return
     }
+    if (post.image == ''){
+      post.image = null
+    }
 
     this.gamecreated.emit(post)
     console.log(post)

@@ -1,1 +1,18 @@
-<p>game-inventory works!</p>,
+<div class="p-3">
+    @if (this.items.isLoading()) {
+    <p>Cargando inventario...</p>
+    } @else {
+    @if (this.items.hasValue() && this.items.value().length > 0) {
+    <button class="btn my-2" [class.btn-primary]="!showForm()" [class.btn-error]="showForm()"
+        (click)="toggleShowForm()">{{ showForm() ? 'Cancelar' : 'Nuevo item' }}</button>
+    @if (showForm()) {
+    <app-item-form (itemcreated)="itemCreated($event)"></app-item-form>
+    }
+    <app-simple-item-list [gid]="gid()" [items]="items.value()"></app-simple-item-list>
+    } @else {
+    <p class="text-2xl">No tienes ningún item en el inventario. </p>
+    <p>Para poder vender, debes tener al menos uno.</p>
+    <app-item-form (itemcreated)="itemCreated($event)"></app-item-form>
+    }
+    }
+</div>
