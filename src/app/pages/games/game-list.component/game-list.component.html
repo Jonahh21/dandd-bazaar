@@ -6,7 +6,7 @@
             </figure>
             <div class="card-body">
                 <h2 class="card-title">{{ game.name }}</h2>
-                <p>Dinero del grupo {{ game.partycurrency }}{{ game.currencysymbol }}</p>
+                <p>Dinero del grupo {{ game.partycurrency.toFixed(2) }}{{ game.currencysymbol }}</p>
             </div>
             <div class="card-actions">
                 <a [routerLink]="'/games/' + game.id + '/inventory'" class="btn btn-primary">Ver inventario</a>

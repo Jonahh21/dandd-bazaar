@@ -1,8 +1,8 @@
 <div class="p-2">
     <button class="btn btn-link my-2" (click)="goback()">&leftarrow; Volver</button>
     <div class="flex justify-between gap-2">
-        <img class="w-100 h-100 rounded-2xl bg-base-200 border" [src]="item.value()?.image || 'https://cdn-icons-png.freepik.com/512/6741/6741151.png'" alt="">
-        <div class="grow h-fill bg-base-200 p-2 rounded-2xl border">
+        <img class="w-100 h-100 rounded-2xl bg-base-200 border object-contain" [src]="item.value()?.image || 'https://cdn-icons-png.freepik.com/512/6741/6741151.png'" alt="">
+        <div class="grow h-fill bg-base-200 p-2 rounded-2xl border relative">
             <h2 class="text-4xl font-extrabold text-primary font-serif"> {{ item.value()?.name }} </h2>
             <p>Juego actual: {{ item.value()?.fromGame }} </p>
             <p>Precio: <span class="text-2xl text-secondary font-extrabold"> {{ (item.value()?.price || 0) | gamecurrency }} </span></p>
@@ -15,20 +15,26 @@
                 <p class="glass rounded"> {{ item.value()?.curses }} </p>
             }
             <p>Cantidad: {{ item.value()?.quantity }} </p>
-            @if ((ddServ.gameInfo.value()?.partycurrency ?? 0) >= (item.value()?.price ?? 2) && ddServ.gameInfo.value()?.name != item.value()?.fromGame) {
+            @if (canBuy() && !sameGame()) {
                 <button class="btn btn-success btn-block text-2xl" (click)="buy()">Comprar</button>
+            }
+            @if (sameGame()) {
+                <button class="btn btn-primary bottom-2" (click)="toggleLoreForm()">Añadir Lore</button>
+                @if (showLoreForm()) {
+                    <app-lore-form (lorecreated)="createlore($event)"></app-lore-form>
+                }
             }
         </div>
     </div>
     <div class="flex gap-2 my-2">
         @if (item.value()?.purchasehistory?.length ?? 0 > 0) {
-            <div class="flex-1">
+            <div class="">
                 <app-purchase-history [history]="item.value()?.purchasehistory || []"></app-purchase-history>
             </div>
         }
         @if (item.value()?.lore?.length ?? 0 > 0) {
-            <div class="flex-1">
-                historial de lore
+            <div class="grow">
+                <app-lore-history [lore]="item.value()!.lore"></app-lore-history>
             </div>
         }
     </div>

@@ -1,0 +1,29 @@
+<table class="table border rounded bg-base-100">
+    <caption>
+        Historial de Lore
+    </caption>
+    <thead class="bg-base-200">
+        <tr>
+            <th>Juego</th>
+            <th>Texto</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cambio de precio</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (i of loresorted(); track i.id) {
+            <tr>
+                <td> {{ i.game.name }} </td>
+                <td> {{ i.text }} </td>
+                <td> {{ i.thenName }} </td>
+                <td> {{ i.thenDescription }} </td>
+                <td> {{ i.thenPriceChange }} </td>
+                <td> {{ i.thenPrice }} </td>
+                <td> {{ i.createdAt | date:"d/M/y" }} </td>
+            </tr>
+        }
+    </tbody>
+</table>

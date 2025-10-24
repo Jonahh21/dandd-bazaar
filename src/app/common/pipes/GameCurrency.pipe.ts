@@ -1,5 +1,6 @@
 import { computed, inject, Pipe, type PipeTransform } from '@angular/core';
 import { DandDService } from '../../services/dand-d.service';
+import { DecimalPipe } from '@angular/common';
 
 enum DisplayType {
   SINGLE,
@@ -13,6 +14,8 @@ enum DisplayType {
 export class GameCurrencyPipe implements PipeTransform {
 
   ddserv = inject(DandDService)
+
+  dp = new DecimalPipe("en-UK")
 
   gameinfo = computed(() => {
     return this.ddserv.gameInfo.value()
@@ -29,16 +32,17 @@ export class GameCurrencyPipe implements PipeTransform {
       dt = DisplayType.SYMBOL
     }
 
+    let valueDecimal = this.dp.transform(value.toFixed(2))
+
+    if (valueDecimal == null) return ''
+    console.log( valueDecimal )
     switch (dt) {
       case DisplayType.SINGLE:
-        return `${value.toFixed(2)} ${this.gameinfo()?.currencynamesingle}`
-        break;
+        return `${valueDecimal} ${this.gameinfo()?.currencynamesingle}`
       case DisplayType.MULTIPLE:
-        return `${value.toFixed(2)} ${this.gameinfo()?.currencynamemultiple}`
-        break;
+        return `${valueDecimal} ${this.gameinfo()?.currencynamemultiple}`
       case DisplayType.SYMBOL:
-        return `${value.toFixed(2)}${this.gameinfo()?.currencysymbol}`
-        break;
+        return `${valueDecimal}${this.gameinfo()?.currencysymbol}`
 
     }
   }

@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup" class="flex flex-col border w-200 p-2 rounded-2xl bg-base-100 gap-2 mt-2">
+    <p>Texto del lore</p>
+    <input formControlName="text" type="text" class="input w-full">
+    <p>Cambiar nombre (opcional)</p>
+    <input formControlName="name" type="text" class="input w-full">
+    <p>Cambiar descripcion (opcional)</p>
+    <textarea formControlName="description" cols="5" class="textarea w-full"></textarea>
+    <p>Cambio de precio (opcional)</p>
+    <input formControlName="pricechange" type="number" class="input w-full">
+    <p>Cambio de imagen (opcional)</p>
+    <input formControlName="image" type="text" class="input w-full">
+    <p>Cambio de estadísticas (opcional)</p>
+    <textarea formControlName="stats" cols="5" class="textarea w-full"></textarea>
+    <p>Cambio de maldiciones (opcional)</p>
+    <textarea formControlName="curses" cols="5" class="textarea w-full"></textarea>
+    <button (click)="submit()" class="btn btn-primary">Añadir lore</button>
+</form>

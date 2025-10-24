@@ -1,12 +1,17 @@
 <table class="table border rounded bg-base-100">
+    <caption>
+        Historial de compras
+    </caption>
     <thead class="bg-base-200">
-        <th>Movimiento</th>
-        <th>Fecha</th>
+        <tr>
+            <th>Movimiento</th>
+            <th>Fecha</th>
+        </tr>
     </thead>
     <tbody>
         @for (item of sortedhistory(); track item.id) {
             <tr>
-                <td> {{ item.origin.name }}({{ item.origin.currencysymbol }}) &rightarrow; {{ item.destination.name }}({{ item.destination.currencysymbol }}) </td>
+                <td> {{ item.origin.name }}({{ item.origin.currencysymbol }}) &downarrow; {{ item.destination.name }}({{ item.destination.currencysymbol }}) </td>
                 <td> {{ item.purchasedat | date:"d/M/y" }} </td>
             </tr>
         }

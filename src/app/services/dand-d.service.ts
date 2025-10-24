@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { GamePost, GameRequest } from '../interfaces/game.interface';
 import { ItemDetailed, ItemPost, ItemSimple } from '../interfaces/item.interface';
 import { HttpClient } from '@angular/common/http';
@@ -7,11 +7,13 @@ import { environment } from '../../environments/environment';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
 import { Pagination } from '../interfaces/pagination.interface';
+import { LorePost, LoreRequest } from '../interfaces/lore.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DandDService {
+  
   http = inject(HttpClient);
 
   authServ = inject(AuthService);
@@ -104,5 +106,10 @@ export class DandDService {
 
   buyGameItem(gameId: number, itemId: number) {
     return this.http.post<ItemDetailed>(environment.apiURL + "games/" + gameId + "/buy/" + itemId, {}, this.authServ.computedHeaders())
+  }
+
+  // MARK: Lore
+  createLore(itemId: number, post: LorePost) {
+    return this.http.post<LoreRequest>(environment.apiURL + "lore/" + itemId, post, this.authServ.computedHeaders())
   }
 }

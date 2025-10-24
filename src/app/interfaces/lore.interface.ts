@@ -25,5 +25,5 @@ export interface LorePost {
     pricechange: number;
     image:       string;
     stats:       string;
-    curses:      string;
+    curses:      string | null;
 }

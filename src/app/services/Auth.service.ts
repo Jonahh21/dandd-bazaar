@@ -20,12 +20,6 @@ export class AuthService {
     }
   })
 
-  headersChanged = effect(() => {
-    console.log("JWT Token: ", this.jwtToken())
-    console.log("Auth Header: ", this.authHeader())
-    console.log("Computed Headers: ", this.computedHeaders())
-  })
-
   constructor() {
     const token = localStorage.getItem('jwtToken');
     if (token) {

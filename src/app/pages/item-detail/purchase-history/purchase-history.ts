@@ -15,7 +15,7 @@ export class PurchaseHistoryComponent {
 
   sortedhistory = computed(() => {
     return this.history().sort((a, b) => {
-      return b.purchasedat.valueOf() - a.purchasedat.valueOf()
+      return b.id - a.id
     })
   })
 
