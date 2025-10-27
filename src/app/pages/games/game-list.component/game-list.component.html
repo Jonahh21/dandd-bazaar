@@ -11,6 +11,15 @@
             <div class="card-actions">
                 <a [routerLink]="'/games/' + game.id + '/inventory'" class="btn btn-primary">Ver inventario</a>
                 <a [routerLink]="'/games/' + game.id + '/store'" class="btn btn-secondary">Comprar items</a>
+                @if (isDeleting()) {
+                    @if (game.id == origin()) {
+                        <button class="btn btn-error" (click)="origin.set(null)">Cancelar</button>
+                    } @else {
+                        <button class="btn btn-info" (click)="setDestination(game.id)">Transferir items aquí</button>
+                    }
+                } @else {
+                    <button class="btn btn-error" (click)="setOrigin(game.id)">Borrar Juego</button>
+                }
             </div>
         </div>
     }

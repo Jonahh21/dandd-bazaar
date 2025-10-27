@@ -27,6 +27,15 @@ export class GamesComponent {
     stream: () => this.ddServ.getGames()
   })
 
+  deleteGame(destination: number) {
+    console.log(destination)
+    this.ddServ.deleteGameAndTransfer(this.ddServ.origingameId()!, destination).subscribe((val) => {
+      console.log(val)
+      this.games.reload()
+      this.ddServ.origingameId.set(null)
+    })
+  }
+
   gamecreated(post: GamePost) {
     this.ddServ.createGame(post).subscribe((value) => {
       console.log("Juego creado: ", value)

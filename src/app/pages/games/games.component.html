@@ -10,7 +10,7 @@
                 <app-game-form (gamecreated)="gamecreated($event)"></app-game-form>
             </div>
         }
-        <app-game-list [games]="games.value()"></app-game-list>
+        <app-game-list [games]="games.value()" [(origin)]="ddServ.origingameId" (destinationSelected)="deleteGame($event)"></app-game-list>
     } 
     @else {
         <p>No tienes juegos, para empezar a usar la web, necesitas tener al menos 1</p>

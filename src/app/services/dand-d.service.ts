@@ -1,4 +1,4 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { effect, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { GamePost, GameRequest } from '../interfaces/game.interface';
 import { ItemDetailed, ItemPost, ItemSimple } from '../interfaces/item.interface';
 import { HttpClient } from '@angular/common/http';
@@ -17,6 +17,8 @@ export class DandDService {
   http = inject(HttpClient);
 
   authServ = inject(AuthService);
+
+  origingameId = signal<number | null>(null)
 
   gameId = signal<number | null>(null)
 
@@ -81,6 +83,10 @@ export class DandDService {
     return this.http.post<GameRequest>(environment.apiURL + "games", post, this.authServ.computedHeaders())
   }
 
+  deleteGameAndTransfer(origin: number, destination: number) {
+    return this.http.delete<GameRequest>(environment.apiURL + "games/delete/" + origin + "/" + destination, this.authServ.computedHeaders())
+  }
+
   // MARK: Items
   getGameInventory(gameId: number) {
     return this.http.get<ItemSimple[]>(environment.apiURL + "games/" + gameId + "/inventory", this.authServ.computedHeaders())
@@ -106,6 +112,10 @@ export class DandDService {
 
   buyGameItem(gameId: number, itemId: number) {
     return this.http.post<ItemDetailed>(environment.apiURL + "games/" + gameId + "/buy/" + itemId, {}, this.authServ.computedHeaders())
+  }
+
+  deleteGameItem(gameId: number, itemId: number) {
+    return this.http.delete<ItemSimple[]>(environment.apiURL + "games/" + gameId + "/inventory/" + itemId, this.authServ.computedHeaders())
   }
 
   // MARK: Lore

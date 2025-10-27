@@ -5,5 +5,9 @@
     <div class="h-fill flex flex-col justify-around content-center glass px-3 rounded-2xl">
         <h2 class="text-3xl font-extrabold text-primary">{{ gameinfo.value()?.name }}</h2>
         <p> Dinero del grupo: <span class="font-extrabold text-accent">{{ gameinfo.value()?.partycurrency! | gamecurrency}}</span> </p>
+        <div class="join self-center">
+            <a [routerLink]="['inventory']" class="btn btn-accent btn-dash join-item" routerLinkActive="btn-active">Inventario</a>
+            <a [routerLink]="['store']" class="btn btn-secondary btn-dash join-item" routerLinkActive="btn-active">Tienda</a>
+        </div>
     </div>
 </div>
